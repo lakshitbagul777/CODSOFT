@@ -10,14 +10,12 @@ public class CurrencyConverter {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        // Step 1: Currency Selection
         System.out.print("Enter the base currency code (e.g., USD): ");
         String baseCurrency = scanner.nextLine().toUpperCase();
 
         System.out.print("Enter the target currency code (e.g., EUR): ");
         String targetCurrency = scanner.nextLine().toUpperCase();
 
-        // Step 2: Fetch real-time exchange rates from the API
         double exchangeRate = getExchangeRate(baseCurrency, targetCurrency);
 
         if (exchangeRate == -1) {
@@ -25,14 +23,11 @@ public class CurrencyConverter {
             System.exit(1);
         }
 
-        // Step 3: Amount Input
         System.out.print("Enter the amount in " + baseCurrency + ": ");
         double amountToConvert = scanner.nextDouble();
 
-        // Step 4: Currency Conversion
         double convertedAmount = amountToConvert * exchangeRate;
 
-        // Step 5: Display Result
         System.out.println("Converted amount: " + convertedAmount + " " + targetCurrency);
 
         scanner.close();
@@ -58,7 +53,6 @@ public class CurrencyConverter {
 
             reader.close();
 
-            // Parse the JSON response to get the exchange rate
             String jsonResponse = response.toString();
             double exchangeRate = Double.parseDouble(jsonResponse.split("\"" + targetCurrency + "\":")[1].split(",")[0]);
 
